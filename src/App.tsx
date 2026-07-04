@@ -1,25 +1,25 @@
 import { useEffect, useRef } from 'react'
-import { Menu, Layers, Compass, Sparkles } from 'lucide-react'
+import { Menu, Hand, Cpu, ShieldCheck } from 'lucide-react'
 import handHuman from '../Picture/hand-human.png'
 import handRobot from '../Picture/hand-robot.png'
 
-const NAV_LINKS = ['Field Guides', 'Geology', 'Plans', 'Live Tour']
+const NAV_LINKS = ['Technology', 'Products', 'Research', 'Contact']
 
 const FEATURES = [
   {
-    icon: Layers,
-    title: 'Layered Insight',
-    text: 'Move through complexity one clean layer at a time, with context that follows you everywhere.',
+    icon: Hand,
+    title: 'Human-Grade Dexterity',
+    text: 'Twenty-seven degrees of freedom deliver movement so natural it feels handmade — every joint tuned to the way people actually work.',
   },
   {
-    icon: Compass,
-    title: 'Guided Exploration',
-    text: 'Purpose-built tools point you toward what matters, long before you know to ask.',
+    icon: Cpu,
+    title: 'Adaptive Intelligence',
+    text: 'On-board learning refines every grip in real time, mastering new tools and unfamiliar tasks in minutes, not months.',
   },
   {
-    icon: Sparkles,
-    title: 'Quiet Intelligence',
-    text: 'Automation that works in the background and surfaces only what deserves your attention.',
+    icon: ShieldCheck,
+    title: 'Engineered Reliability',
+    text: 'Aerospace-grade materials and redundant actuation keep every hand precise and dependable, shift after shift.',
   },
 ]
 
@@ -160,7 +160,7 @@ function App() {
 
   return (
     <div
-      className="min-h-screen bg-white tracking-[-0.02em]"
+      className="min-h-screen bg-black tracking-[-0.02em]"
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
       <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between p-4 sm:p-5">
@@ -174,12 +174,12 @@ function App() {
           >
             <path d="M 256 256 L 128 256 L 0 128 L 128 128 Z M 256 128 L 128 128 L 0 0 L 128 0 Z" />
           </svg>
-          <span className="text-white text-2xl font-playfair italic">Lithos</span>
+          <span className="text-white text-2xl font-playfair italic">Agile Hand</span>
         </div>
 
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-2 py-2 items-center gap-1">
           <button className="text-white px-4 py-1.5 rounded-full text-sm font-medium">
-            Course
+            Overview
           </button>
           {NAV_LINKS.map((link) => (
             <button
@@ -192,7 +192,7 @@ function App() {
         </div>
 
         <button className="hidden md:block bg-white text-gray-900 text-sm font-semibold px-6 py-2.5 rounded-full">
-          Sign Up
+          Request a Demo
         </button>
 
         <button className="md:hidden text-white p-2" aria-label="Open menu">
@@ -252,13 +252,13 @@ function App() {
                 className="block font-playfair italic font-normal text-5xl sm:text-7xl md:text-8xl hero-anim hero-reveal"
                 style={{ letterSpacing: '-0.05em', animationDelay: '0.25s' }}
               >
-                Layers hold
+                Agile hands shape
               </span>
               <span
                 className="block font-normal text-5xl sm:text-7xl md:text-8xl -mt-1 hero-anim hero-reveal"
                 style={{ letterSpacing: '-0.08em', animationDelay: '0.42s' }}
               >
-                tales of time
+                what comes next
               </span>
             </h1>
           </div>
@@ -268,8 +268,8 @@ function App() {
             style={{ animationDelay: '0.7s' }}
           >
             <p className="text-sm text-white/80 leading-relaxed">
-              Every layer of sediment records a chapter of our planet, from ancient
-              seabeds to drifting ash, layered across millions of years beneath us.
+              Every Agile Hand is built to move the way you do — fluid, precise,
+              and human at heart, engineered joint by joint for real-world work.
             </p>
           </div>
 
@@ -278,28 +278,29 @@ function App() {
             style={{ animationDelay: '0.85s' }}
           >
             <p className="text-xs sm:text-sm text-white/80 leading-relaxed">
-              Our interactive maps let you peel back the crust to trace how stones,
-              fossils, and deep time combine to shape the ground beneath your feet.
+              From assembly lines to operating rooms, our adaptive robotic hands
+              learn your craft and work beside you with care and precision.
             </p>
             <button className="bg-[#e8702a] text-white text-sm font-medium px-7 py-3 rounded-full">
-              Start Digging
+              Meet the Hand
             </button>
           </div>
         </section>
       </div>
 
-      <section className="relative bg-white px-6 py-28 sm:py-40">
+      <section className="relative bg-black px-6 py-28 sm:py-40">
         <div className="max-w-4xl mx-auto text-center">
           <p className="fade-up text-xs font-semibold tracking-[0.22em] uppercase text-[#e8702a]">
-            Why Lithos
+            Why Agile Hand
           </p>
-          <h2 className="fade-up mt-6 text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-gray-900">
-            Designed for the moment{' '}
-            <span className="font-playfair italic">discovery meets precision</span>
+          <h2 className="fade-up mt-6 text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
+            Built for the moment{' '}
+            <span className="font-playfair italic">machines learn touch</span>
           </h2>
-          <p className="fade-up mt-8 max-w-xl mx-auto text-base sm:text-lg text-gray-500 leading-relaxed">
-            A single, focused workspace where powerful analysis feels effortless —
-            built with restraint, engineered for depth.
+          <p className="fade-up mt-8 max-w-xl mx-auto text-base sm:text-lg text-gray-400 leading-relaxed">
+            We build robotic hands with the dexterity of a craftsman and the
+            endurance of a machine — so people and robots can finally work
+            hand in hand.
           </p>
         </div>
 
@@ -307,13 +308,13 @@ function App() {
           {FEATURES.map(({ icon: Icon, title, text }) => (
             <div
               key={title}
-              className="fade-up rounded-2xl border border-gray-200 bg-white p-8 sm:p-10 text-left transition-shadow duration-300 hover:shadow-sm"
+              className="fade-up rounded-2xl border border-white/10 bg-white/[0.04] p-8 sm:p-10 text-left transition-colors duration-300 hover:border-white/25"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-100">
-                <Icon size={20} className="text-gray-900" />
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10">
+                <Icon size={20} className="text-white" />
               </div>
-              <h3 className="mt-6 text-lg font-semibold text-gray-900">{title}</h3>
-              <p className="mt-3 text-sm text-gray-500 leading-relaxed">{text}</p>
+              <h3 className="mt-6 text-lg font-semibold text-white">{title}</h3>
+              <p className="mt-3 text-sm text-gray-400 leading-relaxed">{text}</p>
             </div>
           ))}
         </div>
