@@ -34,6 +34,8 @@ function App() {
   const coverRef = useRef<HTMLDivElement>(null)
   const humanRef = useRef<HTMLImageElement>(null)
   const robotRef = useRef<HTMLImageElement>(null)
+  const videoSceneRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const scene = sceneRef.current
@@ -128,6 +130,59 @@ function App() {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
       window.removeEventListener('mousemove', onMouse)
+    }
+  }, [])
+
+  // Scroll-scrubbed dexterous-hand video: playback is paused for good and
+  // currentTime is driven from the pinned scene's scroll progress, so the
+  // hand closes as you scroll down and reopens as you scroll back up.
+  useEffect(() => {
+    const video = videoRef.current
+    const scene = videoSceneRef.current
+    if (!video || !scene) return
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    let duration = 0
+    const onMeta = () => {
+      duration = video.duration
+      video.pause()
+      video.currentTime = 0
+    }
+    if (video.readyState >= 1) onMeta()
+    else video.addEventListener('loadedmetadata', onMeta)
+
+    if (reduced) {
+      // First frame only; no scroll binding.
+      return () => video.removeEventListener('loadedmetadata', onMeta)
+    }
+
+    // The footage is a full open -> fist -> open cycle; the fist is tightest
+    // at ~2.4s. Scrub only the closing half so scroll-down ends on the fist.
+    const SCRUB_END = 2.4
+    const FRAME = 1 / 30 // source is 30fps; skip sub-frame updates
+    let smooth = 0
+    let lastSet = -1
+    let raf = 0
+    const tick = () => {
+      raf = requestAnimationFrame(tick)
+      if (!duration) return
+      const vh = window.innerHeight
+      const range = scene.offsetHeight - vh
+      const p = Math.min(1, Math.max(0, -scene.getBoundingClientRect().top / range))
+      smooth += (p - smooth) * 0.16
+      const end = Math.min(SCRUB_END, duration - 0.05)
+      const t = Math.min(end, Math.max(0, smooth * end))
+      if (Math.abs(t - lastSet) >= FRAME && !video.seeking) {
+        video.currentTime = t
+        lastSet = t
+      }
+    }
+    raf = requestAnimationFrame(tick)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      video.removeEventListener('loadedmetadata', onMeta)
     }
   }, [])
 
@@ -281,35 +336,37 @@ function App() {
         </section>
       </div>
 
-      <section
-        className="relative bg-black overflow-hidden h-screen"
-        style={{ height: '100dvh' }}
-      >
-        {dexterousHandVideo && (
-          <video
-            src={dexterousHandVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-y-0 right-0 h-full w-full md:w-[62%] object-cover"
-          />
-        )}
+      <div ref={videoSceneRef} className="relative" style={{ height: '250vh' }}>
+        <section
+          className="sticky top-0 bg-black overflow-hidden h-screen"
+          style={{ height: '100dvh' }}
+        >
+          {dexterousHandVideo && (
+            <video
+              ref={videoRef}
+              src={dexterousHandVideo}
+              muted
+              playsInline
+              preload="auto"
+              className="absolute inset-y-0 right-0 h-full w-full md:w-[62%] object-cover"
+            />
+          )}
 
-        <div className="relative z-10 flex h-full items-center">
-          <div className="w-full px-6 sm:px-10 md:px-14">
-            <div className="max-w-md lg:max-w-lg">
-              <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
-                The <span className="font-playfair italic">dexterous</span> hand
-              </h2>
-              <p className="fade-up mt-6 text-base sm:text-lg text-gray-400 leading-relaxed">
-                Engineered to move, grip, and adapt with the precision of human
-                touch.
-              </p>
+          <div className="relative z-10 flex h-full items-center">
+            <div className="w-full px-6 sm:px-10 md:px-14">
+              <div className="max-w-md lg:max-w-lg">
+                <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
+                  The <span className="font-playfair italic">dexterous</span> hand
+                </h2>
+                <p className="fade-up mt-6 text-base sm:text-lg text-gray-400 leading-relaxed">
+                  Engineered to move, grip, and adapt with the precision of human
+                  touch.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   )
 }
