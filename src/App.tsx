@@ -225,7 +225,7 @@ function App() {
           <span className="text-white text-2xl font-playfair italic">Agile Hand</span>
         </div>
 
-        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-2 py-2 items-center gap-1">
+        <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-2 py-2 items-center gap-1">
           <button className="text-white px-4 py-1.5 rounded-full text-sm font-medium">
             Overview
           </button>
@@ -239,11 +239,11 @@ function App() {
           ))}
         </div>
 
-        <button className="hidden md:block bg-white text-gray-900 text-sm font-semibold px-6 py-2.5 rounded-full">
+        <button className="hidden lg:block bg-white text-gray-900 text-sm font-semibold px-6 py-2.5 rounded-full">
           Request a Demo
         </button>
 
-        <button className="md:hidden text-white p-2" aria-label="Open menu">
+        <button className="lg:hidden text-white p-2" aria-label="Open menu">
           <Menu size={24} />
         </button>
       </nav>
@@ -297,13 +297,13 @@ function App() {
           <div className="absolute top-[14%] left-0 right-0 z-50 flex flex-col items-center text-center px-5 pointer-events-none">
             <h1 className="text-white leading-[0.95]">
               <span
-                className="block font-playfair italic font-normal text-5xl sm:text-7xl md:text-8xl hero-anim hero-reveal"
+                className="block font-playfair italic font-normal text-4xl min-[400px]:text-5xl sm:text-7xl md:text-8xl hero-anim hero-reveal"
                 style={{ letterSpacing: '-0.05em', animationDelay: '0.25s' }}
               >
                 Agile hands shape
               </span>
               <span
-                className="block font-normal text-5xl sm:text-7xl md:text-8xl -mt-1 hero-anim hero-reveal"
+                className="block font-normal text-4xl min-[400px]:text-5xl sm:text-7xl md:text-8xl -mt-1 hero-anim hero-reveal"
                 style={{ letterSpacing: '-0.08em', animationDelay: '0.42s' }}
               >
                 what comes next
@@ -348,13 +348,13 @@ function App() {
               muted
               playsInline
               preload="auto"
-              className="absolute inset-y-0 right-0 h-full w-full md:w-[62%] object-cover"
+              className="absolute inset-y-0 right-0 h-full w-full object-cover opacity-[.55] md:opacity-100 md:w-[62%]"
             />
           )}
 
           <div className="relative z-10 flex h-full items-center">
             <div className="w-full px-6 sm:px-10 md:px-14">
-              <div className="max-w-md lg:max-w-lg">
+              <div className="max-w-md md:max-w-[32vw] 2xl:max-w-lg">
                 <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
                   The <span className="font-playfair italic">dexterous</span> hand
                 </h2>
@@ -385,7 +385,7 @@ function App() {
 
         <div className="relative z-10 flex h-full items-center justify-end">
           <div className="w-full px-6 sm:px-10 md:px-14 flex md:justify-end">
-            <div className="max-w-md lg:max-w-lg">
+            <div className="max-w-md md:max-w-[40vw] 2xl:max-w-lg">
               <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
                 Touch that <span className="font-playfair italic">resonates</span>
               </h2>

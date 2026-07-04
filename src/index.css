@@ -88,6 +88,14 @@
   /* contrast crushes the inverted off-white background (and its corner
      vignette) to true black */
   filter: invert(1) contrast(1.6) brightness(0.95);
+}
+/* Below md the video sits behind the text full-bleed — dim it for contrast */
+@media (max-width: 767px) {
+  .touch-video {
+    filter: invert(1) contrast(1.6) brightness(0.5);
+  }
+}
+.touch-video {
   -webkit-mask-image: radial-gradient(
     ellipse 58% 58% at 50% 48%,
     black 40%,
