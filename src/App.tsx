@@ -292,7 +292,7 @@ function App() {
             muted
             loop
             playsInline
-            className="absolute inset-0 h-full w-full object-cover object-right"
+            className="absolute inset-y-0 right-0 h-full w-full md:w-[62%] object-cover"
           />
         )}
 
