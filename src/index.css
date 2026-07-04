@@ -79,6 +79,27 @@
   transform: translate(-50%, -50%) scale(1);
 }
 
+/* Touch-section video: the source footage is grayscale on white, so
+   invert(1) turns its background into the site's black (the chrome hand
+   reads as glowing silver), and the radial mask dissolves the panel's
+   edges so the ripples fade into the section instead of hitting the
+   video's hard crop. */
+.touch-video {
+  /* contrast crushes the inverted off-white background (and its corner
+     vignette) to true black */
+  filter: invert(1) contrast(1.6) brightness(0.95);
+  -webkit-mask-image: radial-gradient(
+    ellipse 58% 58% at 50% 48%,
+    black 40%,
+    transparent 68%
+  );
+  mask-image: radial-gradient(
+    ellipse 58% 58% at 50% 48%,
+    black 40%,
+    transparent 68%
+  );
+}
+
 /* Second-section reveal */
 .fade-up {
   opacity: 0;

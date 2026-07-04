@@ -379,17 +379,17 @@ function App() {
             muted
             loop
             playsInline
-            className="absolute inset-y-0 left-0 h-full w-full md:w-[45%] object-cover"
+            className="touch-video absolute inset-y-0 left-0 h-full w-full md:w-[52%] object-cover"
           />
         )}
 
         <div className="relative z-10 flex h-full items-center justify-end">
           <div className="w-full px-6 sm:px-10 md:px-14 flex md:justify-end">
             <div className="max-w-md lg:max-w-lg">
-              <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-gray-900 md:text-white">
+              <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
                 Touch that <span className="font-playfair italic">resonates</span>
               </h2>
-              <p className="fade-up mt-6 text-base sm:text-lg text-gray-700 md:text-gray-400 leading-relaxed">
+              <p className="fade-up mt-6 text-base sm:text-lg text-gray-400 leading-relaxed">
                 Force-sensitive fingertips read texture, pressure, and intent —
                 every contact measured to the micron, every motion felt.
               </p>
