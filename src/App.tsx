@@ -13,8 +13,8 @@ const videoAssets = import.meta.glob('../Video/*.mp4', {
   query: '?url',
   import: 'default',
 }) as Record<string, string>
-const dexterousHandVideo =
-  videoAssets['../Video/0704dexterous-hand.mp4'] ?? Object.values(videoAssets)[0]
+const dexterousHandVideo = videoAssets['../Video/0704dexterous-hand.mp4']
+const touchVideo = videoAssets['../Video/0704-hand2.mp4']
 
 // Source image geometry (Picture/two-hands.png, 1684x934). The two hand
 // layers are crops of it: human = x [0, 900], robot = x [800, 1684].
@@ -367,6 +367,36 @@ function App() {
           </div>
         </section>
       </div>
+
+      <section
+        className="relative bg-black overflow-hidden h-screen"
+        style={{ height: '100dvh' }}
+      >
+        {touchVideo && (
+          <video
+            src={touchVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-y-0 left-0 h-full w-full md:w-[45%] object-cover"
+          />
+        )}
+
+        <div className="relative z-10 flex h-full items-center justify-end">
+          <div className="w-full px-6 sm:px-10 md:px-14 flex md:justify-end">
+            <div className="max-w-md lg:max-w-lg">
+              <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-gray-900 md:text-white">
+                Touch that <span className="font-playfair italic">resonates</span>
+              </h2>
+              <p className="fade-up mt-6 text-base sm:text-lg text-gray-700 md:text-gray-400 leading-relaxed">
+                Force-sensitive fingertips read texture, pressure, and intent —
+                every contact measured to the micron, every motion felt.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
