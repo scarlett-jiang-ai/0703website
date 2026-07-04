@@ -1,4 +1,5 @@
 import { Menu } from 'lucide-react'
+import twoHands from '../Picture/two-hands.png'
 
 const NAV_LINKS = ['Field Guides', 'Geology', 'Plans', 'Live Tour']
 
@@ -49,6 +50,39 @@ function App() {
         className="relative w-full overflow-hidden h-screen bg-black"
         style={{ height: '100dvh' }}
       >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${twoHands})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: '#000000',
+          }}
+        />
+
+        {/* Animated spinner overlaid on the static one baked into the image.
+            The black disc hides the baked-in spinner; position/size use
+            max(vw, vh) terms so they track the cover-scaled image point. */}
+        <div className="hero-spinner-mask z-10" aria-hidden="true">
+          <svg className="hero-spinner" viewBox="0 0 100 100" fill="none">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <line
+                key={i}
+                x1="50"
+                y1="9"
+                x2="50"
+                y2="27"
+                stroke="#ffffff"
+                strokeWidth="8"
+                strokeLinecap="round"
+                opacity={(i + 1) / 12}
+                transform={`rotate(${i * 30} 50 50)`}
+              />
+            ))}
+          </svg>
+        </div>
+
         <div className="absolute top-[14%] left-0 right-0 z-50 flex flex-col items-center text-center px-5 pointer-events-none">
           <h1 className="text-white leading-[0.95]">
             <span
