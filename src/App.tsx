@@ -1,27 +1,20 @@
 import { useEffect, useRef } from 'react'
-import { Menu, Hand, Cpu, ShieldCheck } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import handHuman from '../Picture/hand-human.png'
 import handRobot from '../Picture/hand-robot.png'
 
 const NAV_LINKS = ['Technology', 'Products', 'Research', 'Contact']
 
-const FEATURES = [
-  {
-    icon: Hand,
-    title: 'Human-Grade Dexterity',
-    text: 'Twenty-seven degrees of freedom deliver movement so natural it feels handmade — every joint tuned to the way people actually work.',
-  },
-  {
-    icon: Cpu,
-    title: 'Adaptive Intelligence',
-    text: 'On-board learning refines every grip in real time, mastering new tools and unfamiliar tasks in minutes, not months.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Engineered Reliability',
-    text: 'Aerospace-grade materials and redundant actuation keep every hand precise and dependable, shift after shift.',
-  },
-]
+// Resolved lazily via glob so the build succeeds even before the video
+// file is pushed to the repo; once Video/0704dexterous-hand.mp4 exists it
+// is bundled and picked up automatically.
+const videoAssets = import.meta.glob('../Video/*.mp4', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>
+const dexterousHandVideo =
+  videoAssets['../Video/0704dexterous-hand.mp4'] ?? Object.values(videoAssets)[0]
 
 // Source image geometry (Picture/two-hands.png, 1684x934). The two hand
 // layers are crops of it: human = x [0, 900], robot = x [800, 1684].
@@ -288,35 +281,33 @@ function App() {
         </section>
       </div>
 
-      <section className="relative bg-black px-6 py-28 sm:py-40">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="fade-up text-xs font-semibold tracking-[0.22em] uppercase text-[#e8702a]">
-            Why Agile Hand
-          </p>
-          <h2 className="fade-up mt-6 text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
-            Built for the moment{' '}
-            <span className="font-playfair italic">machines learn touch</span>
-          </h2>
-          <p className="fade-up mt-8 max-w-xl mx-auto text-base sm:text-lg text-gray-400 leading-relaxed">
-            We build robotic hands with the dexterity of a craftsman and the
-            endurance of a machine — so people and robots can finally work
-            hand in hand.
-          </p>
-        </div>
+      <section
+        className="relative bg-black overflow-hidden h-screen"
+        style={{ height: '100dvh' }}
+      >
+        {dexterousHandVideo && (
+          <video
+            src={dexterousHandVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover object-right"
+          />
+        )}
 
-        <div className="max-w-6xl mx-auto mt-20 sm:mt-28 grid gap-6 md:grid-cols-3">
-          {FEATURES.map(({ icon: Icon, title, text }) => (
-            <div
-              key={title}
-              className="fade-up rounded-2xl border border-white/10 bg-white/[0.04] p-8 sm:p-10 text-left transition-colors duration-300 hover:border-white/25"
-            >
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10">
-                <Icon size={20} className="text-white" />
-              </div>
-              <h3 className="mt-6 text-lg font-semibold text-white">{title}</h3>
-              <p className="mt-3 text-sm text-gray-400 leading-relaxed">{text}</p>
+        <div className="relative z-10 flex h-full items-center">
+          <div className="w-full px-6 sm:px-10 md:px-14">
+            <div className="max-w-md lg:max-w-lg">
+              <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
+                The <span className="font-playfair italic">dexterous</span> hand
+              </h2>
+              <p className="fade-up mt-6 text-base sm:text-lg text-gray-400 leading-relaxed">
+                Engineered to move, grip, and adapt with the precision of human
+                touch.
+              </p>
             </div>
-          ))}
+          </div>
         </div>
       </section>
     </div>
