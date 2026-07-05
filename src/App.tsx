@@ -361,7 +361,7 @@ function App() {
           )}
 
           <div className="relative z-10 flex h-full items-center">
-            <div className="w-full px-6 sm:px-10 md:px-14">
+            <div className="w-full px-6 sm:px-10 md:px-0 md:w-1/2 md:flex md:justify-center">
               <div className="max-w-md md:max-w-[32vw] 2xl:max-w-lg">
                 <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
                   The <span className="font-playfair italic">dexterous</span> hand
@@ -404,7 +404,7 @@ function App() {
           className="relative z-10 flex min-h-screen items-center justify-end"
           style={{ minHeight: '100dvh' }}
         >
-          <div className="w-full px-6 sm:px-10 md:px-14 py-24 flex md:justify-end">
+          <div className="w-full px-6 sm:px-10 md:px-0 py-24 flex md:w-1/2 md:ml-auto md:justify-center">
             <div className="max-w-md md:max-w-[40vw] 2xl:max-w-lg">
               <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
                 Touch that <span className="font-playfair italic">resonates</span>
