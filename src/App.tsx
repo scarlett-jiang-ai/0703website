@@ -171,6 +171,8 @@ function App() {
       const range = scene.offsetHeight - vh
       const p = Math.min(1, Math.max(0, -scene.getBoundingClientRect().top / range))
       smooth += (p - smooth) * 0.16
+      // Reveal the mission layer once the hand is mostly closed.
+      scene.classList.toggle('revealed', smooth > 0.55)
       const end = Math.min(SCRUB_END, duration - 0.05)
       const t = Math.min(end, Math.max(0, smooth * end))
       if (Math.abs(t - lastSet) >= FRAME && !video.seeking) {
@@ -368,16 +370,25 @@ function App() {
                   Engineered to move, grip, and adapt with the precision of human
                   touch.
                 </p>
+
+                <div className="mission-layer mt-10 border-t border-white/10 pt-8">
+                  <p className="text-xs font-semibold tracking-[0.22em] uppercase text-[#e8702a]">
+                    Who We Are
+                  </p>
+                  <p className="mt-4 text-sm sm:text-base text-gray-400 leading-relaxed">
+                    Founded in 2019 by roboticists from Berkeley and ETH Zürich,
+                    Agile Hand exists to give machines the human touch. Today
+                    more than 12,000 of our hands work in factories, labs, and
+                    operating rooms across 30 countries.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
       </div>
 
-      <section
-        className="relative bg-black overflow-hidden h-screen"
-        style={{ height: '100dvh' }}
-      >
+      <section className="relative bg-black overflow-hidden">
         {touchVideo && (
           <video
             src={touchVideo}
@@ -389,8 +400,11 @@ function App() {
           />
         )}
 
-        <div className="relative z-10 flex h-full items-center justify-end">
-          <div className="w-full px-6 sm:px-10 md:px-14 flex md:justify-end">
+        <div
+          className="relative z-10 flex min-h-screen items-center justify-end"
+          style={{ minHeight: '100dvh' }}
+        >
+          <div className="w-full px-6 sm:px-10 md:px-14 py-24 flex md:justify-end">
             <div className="max-w-md md:max-w-[40vw] 2xl:max-w-lg">
               <h2 className="fade-up text-4xl sm:text-6xl leading-[1.05] tracking-[-0.04em] text-white">
                 Touch that <span className="font-playfair italic">resonates</span>
@@ -399,6 +413,42 @@ function App() {
                 Force-sensitive fingertips read texture, pressure, and intent —
                 every contact measured to the micron, every motion felt.
               </p>
+
+              <div className="mt-12">
+                {[
+                  {
+                    num: '01',
+                    name: 'AH-1 Dexterous Hand',
+                    text: 'Our flagship 27-DoF hand, drop-in ready for any collaborative robot arm.',
+                  },
+                  {
+                    num: '02',
+                    name: 'Tactile Fingertips',
+                    text: 'Retrofit sensor pads that give any gripper a true sense of touch.',
+                  },
+                  {
+                    num: '03',
+                    name: 'Grasp Control SDK',
+                    text: 'Real-time grasp planning and force control — integrated in minutes.',
+                  },
+                ].map(({ num, name, text }) => (
+                  <a
+                    key={num}
+                    href="#demo"
+                    className="fade-up group flex items-baseline gap-4 border-t border-white/10 py-5"
+                  >
+                    <span className="text-xs text-[#e8702a] font-semibold">{num}</span>
+                    <span className="flex-1">
+                      <span className="block text-white font-semibold text-base sm:text-lg group-hover:text-[#e8702a] transition-colors">
+                        {name}
+                      </span>
+                      <span className="mt-1 block text-sm text-gray-400 leading-relaxed">
+                        {text}
+                      </span>
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

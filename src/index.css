@@ -108,6 +108,17 @@
   );
 }
 
+/* Mission layer in the scrubbed section — revealed once the fist closes */
+.mission-layer {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.revealed .mission-layer {
+  opacity: 1;
+  transform: none;
+}
+
 /* Second-section reveal */
 .fade-up {
   opacity: 0;
@@ -120,4 +131,5 @@
   .hero-anim { animation: none; opacity: 1; }
   .hero-spinner { animation: none; }
   .fade-up { opacity: 1; transform: none; transition: none; }
+  .mission-layer { opacity: 1; transform: none; transition: none; }
 }
